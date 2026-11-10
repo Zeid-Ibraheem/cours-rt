@@ -1,0 +1,6 @@
+# Les supports des profs restent sur mon PC : jamais sur GitHub
+fournis/
+
+__pycache__/
+*.pyc
+.DS_Store
