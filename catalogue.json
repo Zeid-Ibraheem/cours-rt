@@ -29,6 +29,13 @@
     }
   },
   "fournis": {
+    "R3.04": [
+      {
+        "date": "2026-11-12",
+        "fichier": "r304.pdf",
+        "titre": "Cours R3.04"
+      }
+    ],
     "R3.05": [
       {
         "date": "2026-11-12",
@@ -118,6 +125,10 @@
   },
   "pieges": {},
   "ressources": {
+    "R3.04": {
+      "controles": [],
+      "nom": "Services d'annuaires"
+    },
     "R3.05": {
       "controles": [],
       "nom": "Chaînes de transmissions numériques"
