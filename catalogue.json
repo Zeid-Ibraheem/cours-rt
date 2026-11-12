@@ -28,7 +28,50 @@
       "type": "fiche"
     }
   },
-  "fournis": {},
+  "fournis": {
+    "R3.07": [
+      {
+        "date": "2026-11-12",
+        "fichier": "R307 TD1.pdf",
+        "titre": "R307 TD1"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "R307 TD2.pdf",
+        "titre": "R307 TD2"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "R307 TD3.pdf",
+        "titre": "R307 TD3"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "R307 TD5.pdf",
+        "titre": "R307 TD5"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "TD 1 307.pdf",
+        "titre": "TD 1 307"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "CM1_Boucle_Locale_Cuivre.pdf",
+        "titre": "CM1_Boucle_Locale_Cuivre"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "CM2_Boucle_Locale_Optique.pdf",
+        "titre": "CM2_Boucle_Locale_Optique"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "CM3 - LAccès Radio Large Bande et les Réseaux Cellulaires (RAN).pdf",
+        "titre": "CM3 - LAccès Radio Large Bande et les Réseaux Cellulaires (RAN)"
+      }
+    ]
+  },
   "pieges": {},
   "ressources": {
     "R3.06": {
