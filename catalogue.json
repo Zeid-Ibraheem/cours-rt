@@ -29,6 +29,38 @@
     }
   },
   "fournis": {
+    "R3.05": [
+      {
+        "date": "2026-11-12",
+        "fichier": "poly R305.pdf",
+        "titre": "poly R305"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "TD_R305_4.pdf",
+        "titre": "TD_R305_4"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "Cours CM - Transmissions Numériques complet.pdf",
+        "titre": "Cours CM - Transmissions Numériques complet"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "TD 1 _ Notions Fondamentales et Modulations en Bande de Base.pdf",
+        "titre": "TD 1 _ Notions Fondamentales et Modulations en Bande de Base"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "TD 2 _ Modulations M-aires, PAM et Densité Spectrale de Puissance (Chapitre 2).pdf",
+        "titre": "TD 2 _ Modulations M-aires, PAM et Densité Spectrale de Puissance (Chapitre 2)"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "TD 3 _ Théorie de lInformation et Codage de Source (Compression).pdf",
+        "titre": "TD 3 _ Théorie de lInformation et Codage de Source (Compression)"
+      }
+    ],
     "R3.06": [
       {
         "date": "2026-11-12",
@@ -86,6 +118,10 @@
   },
   "pieges": {},
   "ressources": {
+    "R3.05": {
+      "controles": [],
+      "nom": "Chaînes de transmissions numériques"
+    },
     "R3.06": {
       "controles": [],
       "nom": "Fibres optiques et propagation"
