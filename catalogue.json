@@ -1,8 +1,23 @@
 {
-  "fichiers": {},
+  "fichiers": {
+    "S3/R3.07/fiches/2026-11-09-r307-essentiel-1page.pdf": {
+      "annexes": [],
+      "chapitre": "",
+      "chemin": "S3/R3.07/fiches/2026-11-09-r307-essentiel-1page.pdf",
+      "date": "2026-11-09",
+      "ressource": "R3.07",
+      "titre": "L'essentiel de R3.07 en une page",
+      "type": "fiche"
+    }
+  },
   "fournis": {},
   "pieges": {},
-  "ressources": {},
+  "ressources": {
+    "R3.07": {
+      "controles": [],
+      "nom": "Réseaux d'accès"
+    }
+  },
   "seances": [],
   "version": 1
 }
