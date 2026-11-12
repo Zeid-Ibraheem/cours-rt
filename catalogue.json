@@ -121,6 +121,13 @@
         "fichier": "CM3 - LAccès Radio Large Bande et les Réseaux Cellulaires (RAN).pdf",
         "titre": "CM3 - LAccès Radio Large Bande et les Réseaux Cellulaires (RAN)"
       }
+    ],
+    "R3.08": [
+      {
+        "date": "2026-11-12",
+        "fichier": "R308_cours.pdf",
+        "titre": "Cours R3.08"
+      }
     ]
   },
   "pieges": {},
@@ -140,6 +147,10 @@
     "R3.07": {
       "controles": [],
       "nom": "Réseaux d'accès"
+    },
+    "R3.08": {
+      "controles": [],
+      "nom": "Consolidation de la programmation"
     }
   },
   "seances": [],
