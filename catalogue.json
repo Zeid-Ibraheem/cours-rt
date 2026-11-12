@@ -1,5 +1,14 @@
 {
   "fichiers": {
+    "S3/R3.06/fiches/2026-11-08-fiche-r306-antennes.pdf": {
+      "annexes": [],
+      "chapitre": "",
+      "chemin": "S3/R3.06/fiches/2026-11-08-fiche-r306-antennes.pdf",
+      "date": "2026-11-08",
+      "ressource": "R3.06",
+      "titre": "Les antennes",
+      "type": "fiche"
+    },
     "S3/R3.07/entrainements/2026-11-10-r307-td-entrainement-corrige.pdf": {
       "annexes": [],
       "chapitre": "",
@@ -22,6 +31,10 @@
   "fournis": {},
   "pieges": {},
   "ressources": {
+    "R3.06": {
+      "controles": [],
+      "nom": "Fibres optiques et propagation"
+    },
     "R3.07": {
       "controles": [],
       "nom": "Réseaux d'accès"
