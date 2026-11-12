@@ -3,6 +3,10 @@
 
   cours                         importe tous les seance-*.zip de Téléchargements, commit, push
   cours fichier.zip [...]       importe ces paquets-là
+  cours ajoute R3.07 a.pdf [...] publie des fichiers que tu as déjà (PDF d'entraînement, fiches…)
+                                options : --type entrainement|fiche|exercice|divers  --titre "…"
+                                          --chapitre "…"  --date AAAA-MM-JJ  --nom "Nom de la ressource"
+                                un dossier à la place des fichiers = tout son contenu
   cours fourni R3.07 cm3.pdf    range un support du prof (liste publiée, fichier jamais publié)
   cours sommaire                refait les pages de sommaire, sans commit
   cours verifie                 contrôle tout le dépôt (infos perso, supports des profs, tailles)
@@ -18,6 +22,7 @@ import json
 import os
 import re
 import shutil
+import unicodedata
 import subprocess
 import sys
 import zipfile
@@ -376,7 +381,7 @@ def preparer(manifeste, fichiers, cat):
             "fournis": fournis, "pieges": pieges, "controles": controles, "deja_la": deja_la}
 
 
-def appliquer(plan, cat, empreinte):
+def appliquer(plan, cat, empreinte, seance=True):
     for code, nom in plan["ressources"].items():
         r = cat["ressources"].setdefault(code, {"nom": "", "controles": []})
         if nom and not r.get("nom"):
@@ -409,6 +414,8 @@ def appliquer(plan, cat, empreinte):
         for p in liste:
             if not any(x["texte"] == p for x in existants):
                 existants.append({"date": plan["date"], "texte": p})
+    if not seance:
+        return
     n = sum(1 for s in cat["seances"] if s["date"] == plan["date"]) + 1
     cat["seances"].append({"id": f"{plan['date']}-{n}", "date": plan["date"], "titre": plan["titre"],
                            "resume": plan["resume"], "ressources": sorted(plan["ressources"]),
@@ -688,6 +695,96 @@ def ranger_zip(chemin):
         pass
 
 
+def nom_publiable(stem, ext, date):
+    s = unicodedata.normalize("NFKD", stem).encode("ascii", "ignore").decode().lower()
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")[:70] or "fichier"
+    if not re.match(r"\d{4}-\d{2}-\d{2}", s):
+        s = f"{date}-{s}"
+    return f"{s}.{ext.lower()}"
+
+
+def titre_lisible(stem):
+    t = re.sub(r"[_-]+", " ", stem).strip()
+    t = re.sub(r"^\d{4} \d{2} \d{2} ", "", t)
+    return (t[:1].upper() + t[1:]) if t else stem
+
+
+def cmd_ajoute(args):
+    depot_git()
+    opts = {"--type": "entrainement", "--titre": None, "--chapitre": "", "--date": None, "--nom": None}
+    reste, it = [], iter(args)
+    for a in it:
+        if a in opts:
+            opts[a] = next(it, None)
+        else:
+            reste.append(a)
+    if len(reste) < 2:
+        raise Erreur("usage : cours ajoute R3.07 fichier.pdf [autres] [--type entrainement|fiche|exercice|divers] "
+                     "[--titre \"…\"] [--chapitre \"…\"] [--date AAAA-MM-JJ] [--nom \"Nom de la ressource\"]")
+    code, _ = normaliser_code(reste[0])
+    type_ = opts["--type"]
+    if type_ not in TYPES:
+        raise Erreur(f"type « {type_} » inconnu ({', '.join(TYPES)})")
+    if opts["--date"]:
+        opts["--date"] = date_valide(opts["--date"], "--date")
+    chemins = []
+    for brut in reste[1:]:
+        p = Path(brut).expanduser()
+        if p.is_dir():
+            chemins += sorted(x for x in p.iterdir() if x.is_file()
+                              and x.suffix.lower().lstrip(".") in EXTENSIONS)
+        elif p.is_file():
+            chemins.append(p)
+        else:
+            raise Erreur(f"introuvable : {p}")
+    if not chemins:
+        raise Erreur("aucun fichier à ajouter")
+    if opts["--titre"] and len(chemins) > 1:
+        raise Erreur("--titre ne marche qu'avec un seul fichier (sinon le titre vient du nom du fichier)")
+    cat = charger_catalogue()
+    if opts["--nom"]:
+        cat["ressources"].setdefault(code, {"nom": "", "controles": []})["nom"] = opts["--nom"].strip()
+    nom_ressource = cat["ressources"].get(code, {}).get("nom", "")
+    dossier = dossier_ressource(code) / TYPES[type_][0]
+    deja = {sha256((RACINE / c).read_bytes()) for c, e in cat["fichiers"].items()
+            if e["ressource"] == code and (RACINE / c).is_file()}
+    ajoutes = 0
+    for p in chemins:
+        ext = p.suffix.lower().lstrip(".")
+        if ext not in EXTENSIONS:
+            attention(f"{p.name} : extension .{ext} refusée, ignoré")
+            continue
+        donnees = p.read_bytes()
+        if sha256(donnees) in deja:
+            dire(f"  {p.name} : déjà dans le dépôt, ignoré")
+            continue
+        date = opts["--date"] or dt.date.fromtimestamp(p.stat().st_mtime).isoformat()
+        nom = nom_publiable(p.stem, ext, date)
+        base, n = nom[:-len(ext) - 1], 2
+        while (RACINE / dossier / nom).exists():
+            nom = f"{base}-{n}.{ext}"
+            n += 1
+        manifeste = {"format": 1, "date": date, "titre": "ajout à la main",
+                     "ressources": {code: nom_ressource},
+                     "fichiers": [{"fichier": nom, "type": type_,
+                                   "titre": opts["--titre"] or titre_lisible(p.stem),
+                                   "chapitre": opts["--chapitre"] or ""}]}
+        plan = preparer(manifeste, {nom: donnees}, cat)
+        appliquer(plan, cat, None, seance=False)
+        deja.add(sha256(donnees))
+        ajoutes += 1
+        dire(f"  {p.name} → {plan['entrees'][0]['chemin']} (daté du {date_fr(date)})")
+    if not ajoutes:
+        dire("Rien de nouveau à ajouter.")
+        return 0
+    sauver_catalogue(cat)
+    generer(cat)
+    sauver_catalogue(cat)
+    if commit(f"{code} · ajout de {pluriel(ajoutes, TYPES[type_][2])}"):
+        pousser()
+    return 0
+
+
 def cmd_fourni(args):
     depot_git()
     titre, nom_ressource, reste = None, None, []
@@ -773,6 +870,8 @@ def main(argv):
         if args and args[0] in ("aide", "-h", "--help"):
             dire(__doc__.strip())
             return 0
+        if args and args[0] == "ajoute":
+            return cmd_ajoute(args[1:])
         if args and args[0] == "fourni":
             return cmd_fourni(args[1:])
         if args and args[0] == "sommaire":
