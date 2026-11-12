@@ -29,6 +29,18 @@
     }
   },
   "fournis": {
+    "R3.06": [
+      {
+        "date": "2026-11-12",
+        "fichier": "R306 TD 1.pdf",
+        "titre": "R306 TD 1"
+      },
+      {
+        "date": "2026-11-12",
+        "fichier": "poly R306-2026.pdf",
+        "titre": "poly R306-2026"
+      }
+    ],
     "R3.07": [
       {
         "date": "2026-11-12",
