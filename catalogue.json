@@ -128,6 +128,13 @@
         "fichier": "R308_cours.pdf",
         "titre": "Cours R3.08"
       }
+    ],
+    "R3.09": [
+      {
+        "date": "2026-11-12",
+        "fichier": "R309_cours.pdf",
+        "titre": "Cours R3.09"
+      }
     ]
   },
   "pieges": {},
@@ -151,6 +158,10 @@
     "R3.08": {
       "controles": [],
       "nom": "Consolidation de la programmation"
+    },
+    "R3.09": {
+      "controles": [],
+      "nom": "Programmation événementielle"
     }
   },
   "seances": [],

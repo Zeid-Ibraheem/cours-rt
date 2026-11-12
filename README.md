@@ -13,6 +13,7 @@ Les supports des profs restent sur mon PC. Ils sont listés pour savoir sur quoi
 | [R3.06 · Fibres optiques et propagation](S3/R3.06/README.md) |  |  |  | 1 |  |  |  |
 | [R3.07 · Réseaux d'accès](S3/R3.07/README.md) |  |  |  | 1 |  | 1 |  |
 | [R3.08 · Consolidation de la programmation](S3/R3.08/README.md) |  |  |  |  |  |  |  |
+| [R3.09 · Programmation événementielle](S3/R3.09/README.md) |  |  |  |  |  |  |  |
 
 ## Comment c'est rangé
 
