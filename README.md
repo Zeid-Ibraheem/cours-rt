@@ -8,6 +8,7 @@ Les supports des profs restent sur mon PC. Ils sont listés pour savoir sur quoi
 
 | Ressource | Séances | Dernière | Prochain contrôle | Fiches | Exos | Sujets | Pièges |
 |---|---|---|---|---|---|---|---|
+| [R3.01 · nom à compléter](S3/R3.01/README.md) |  |  |  |  |  |  |  |
 | [R3.04 · Services d'annuaires](S3/R3.04/README.md) |  |  |  |  |  |  |  |
 | [R3.05 · Chaînes de transmissions numériques](S3/R3.05/README.md) |  |  |  |  |  |  |  |
 | [R3.06 · Fibres optiques et propagation](S3/R3.06/README.md) |  |  |  | 1 |  |  |  |
